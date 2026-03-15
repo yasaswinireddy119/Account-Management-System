@@ -1,67 +1,91 @@
 import { useState } from "react";
-import { TextField, Button, Card, Typography } from "@mui/material";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "./login.css";
 
-function Login(){
+function Login() {
 
- const navigate = useNavigate()
+  const navigate = useNavigate();
 
- const [email,setEmail] = useState("")
- const [password,setPassword] = useState("")
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
 
- const handleLogin = () => {
+  const handleLogin = () => {
 
-  const user = JSON.parse(localStorage.getItem("user"))
+    const user = JSON.parse(localStorage.getItem("user"));
 
-  if(user && user.email === email && user.password === password){
-
-   navigate("/dashboard")
-
-  }else{
-
-   alert("Invalid credentials")
+    if(user && user.email === email && user.password === password){
+      navigate("/dashboard");
+    }else{
+      alert("Invalid credentials");
+    }
 
   }
 
- }
+  const handleReset = () =>{
+    setEmail("");
+    setPassword("");
+  }
 
- return(
+  return (
 
-  <Card style={{width:400,margin:"100px auto",padding:30,textAlign:"center"}}>
+    <div className="container">
 
-   <Typography variant="h4">Login</Typography>
+      <div className="left">
 
-   <br/>
+        <h1 className="title">🏦 WELCOME TO THE ACCOUNT MANAGEMENT SYSTEM</h1>
 
-   <TextField
-   label="Email"
-   fullWidth
-   onChange={(e)=>setEmail(e.target.value)}
-   />
+        <div className="login-box">
 
-   <br/><br/>
+          <h2>LOGIN</h2>
 
-   <TextField
-   label="Password"
-   type="password"
-   fullWidth
-   onChange={(e)=>setPassword(e.target.value)}
-   />
+          <label>Account Email</label>
+          <input
+            type="text"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
+          />
 
-   <br/><br/>
+          <label>Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e)=>setPassword(e.target.value)}
+          />
 
-   <Button variant="contained" onClick={handleLogin}>
-    Login
-   </Button>
+          <div className="buttons">
 
-   <br/><br/>
+            <button className="login-btn" onClick={handleLogin}>
+              LOGIN
+            </button>
 
-   <Link to="/signup">Create Account</Link>
+            <button
+              className="signup-btn"
+              onClick={()=>navigate("/signup")}
+            >
+              SIGNUP
+            </button>
 
-  </Card>
+          </div>
 
- )
+          
+
+        </div>
+
+      </div>
+
+      <div className="right">
+
+        <img
+          src="https://cdn.corporatefinanceinstitute.com/assets/accounting.jpeg"
+          alt="bank"
+        />
+
+      </div>
+
+    </div>
+
+  )
 
 }
 
-export default Login
+export default Login;

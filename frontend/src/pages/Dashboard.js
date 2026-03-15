@@ -1,48 +1,47 @@
-import { Button, Card, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import "./dashboard.css";
 
-function Dashboard(){
+function Dashboard() {
 
- const navigate = useNavigate()
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
 
- const user = JSON.parse(localStorage.getItem("user"))
+  return (
 
- return(
+    <div className="dashboard">
 
-  <Card style={{width:500,margin:"100px auto",padding:30,textAlign:"center"}}>
+      <h1 className="dashboard-title">
+        Account Dashboard
+      </h1>
 
-   <Typography variant="h4">
-    Welcome {user.name}
-   </Typography>
+      <div className="dashboard-cards">
 
-   <br/>
+        <div className="card">
+          <h2>Current Balance</h2>
+          <p className="balance">₹ {user.balance}</p>
+        </div>
 
-   <Typography variant="h5">
-    Balance: ₹{user.balance}
-   </Typography>
+        <div className="card">
+          <h2>Send Money</h2>
 
-   <br/><br/>
+          <button onClick={()=>navigate("/send")}>
+            Send Money
+          </button>
+        </div>
 
-   <Button
-   variant="contained"
-   onClick={()=>navigate("/send")}
-   >
-   Send Money
-   </Button>
+        <div className="card">
+          <h2>Account Statement</h2>
 
-   <br/><br/>
+          <button onClick={()=>navigate("/statement")}>
+            View Statement
+          </button>
+        </div>
 
-   <Button
-   variant="outlined"
-   onClick={()=>navigate("/statement")}
-   >
-   Account Statement
-   </Button>
+      </div>
 
-  </Card>
+    </div>
 
- )
-
+  );
 }
 
-export default Dashboard
+export default Dashboard;

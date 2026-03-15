@@ -1,28 +1,89 @@
-import { Card, Typography } from "@mui/material";
+import "./statement.css";
 
 function Statement(){
 
- return(
+  const transactions = [
+    {
+      date:"10 Mar 2026",
+      type:"Credit",
+      amount:500,
+      from:"Ravi",
+      to:"You"
+    },
+    {
+      date:"11 Mar 2026",
+      type:"Debit",
+      amount:200,
+      from:"You",
+      to:"Arjun"
+    },
+    {
+      date:"12 Mar 2026",
+      type:"Credit",
+      amount:1000,
+      from:"Rahul",
+      to:"You"
+    },
+    {
+      date:"13 Mar 2026",
+      type:"Debit",
+      amount:300,
+      from:"You",
+      to:"Ajay"
+    }
+  ];
 
-  <Card style={{width:500,margin:"100px auto",padding:30,textAlign:"center"}}>
+  return(
 
-   <Typography variant="h4">
-    Account Statement
-   </Typography>
+    <div className="statement-container">
 
-   <br/>
+      <h1>Account Statement</h1>
 
-   <Typography>
-    Dummy Transaction Data
-   </Typography>
+      <table>
 
-   <p style={{color:"green"}}>Credit ₹500</p>
-   <p style={{color:"red"}}>Debit ₹200</p>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>From</th>
+            <th>To</th>
+          </tr>
+        </thead>
 
-  </Card>
+        <tbody>
 
- )
+          {transactions.map((t,index)=>(
+            <tr key={index}>
+
+              <td>{t.date}</td>
+
+              <td
+                style={{
+                  color: t.type === "Credit" ? "green" : "red",
+                  fontWeight:"bold"
+                }}
+              >
+                {t.type}
+              </td>
+
+              <td>₹ {t.amount}</td>
+
+              <td>{t.from}</td>
+
+              <td>{t.to}</td>
+
+            </tr>
+          ))}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  )
 
 }
 
-export default Statement
+export default Statement;

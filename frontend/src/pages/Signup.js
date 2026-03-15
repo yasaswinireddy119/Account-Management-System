@@ -1,72 +1,61 @@
 import { useState } from "react";
-import { TextField, Button, Card, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function Signup() {
+function Signup(){
 
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
- const [name,setName] = useState("");
- const [email,setEmail] = useState("");
- const [password,setPassword] = useState("");
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
 
- const handleSignup = () => {
+  const handleSignup = () => {
 
-  const user = {
-   name,
-   email,
-   password,
-   balance:10000
+    const user = {
+      email,
+      password,
+      balance:10000
+    };
+
+    localStorage.setItem("user", JSON.stringify(user));
+
+    alert("Account created successfully");
+
+    navigate("/");
   };
 
-  localStorage.setItem("user",JSON.stringify(user));
+  return(
 
-  alert("Account Created with ₹10,000");
+    <div style={{
+      width:"350px",
+      margin:"100px auto",
+      padding:"30px",
+      border:"1px solid #ddd",
+      borderRadius:"10px",
+      textAlign:"center"
+    }}>
 
-  navigate("/");
- };
+      <h2>Signup</h2>
 
- return(
+      <input
+        type="email"
+        placeholder="Email"
+        onChange={(e)=>setEmail(e.target.value)}
+        style={{width:"100%",padding:"10px",margin:"10px"}}
+      />
 
-  <Card style={{width:400,margin:"100px auto",padding:30,textAlign:"center"}}>
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={(e)=>setPassword(e.target.value)}
+        style={{width:"100%",padding:"10px",margin:"10px"}}
+      />
 
-   <Typography variant="h4">Signup</Typography>
+      <button onClick={handleSignup}>
+        Create Account
+      </button>
 
-   <br/>
-
-   <TextField
-   label="Name"
-   fullWidth
-   onChange={(e)=>setName(e.target.value)}
-   />
-
-   <br/><br/>
-
-   <TextField
-   label="Email"
-   fullWidth
-   onChange={(e)=>setEmail(e.target.value)}
-   />
-
-   <br/><br/>
-
-   <TextField
-   label="Password"
-   type="password"
-   fullWidth
-   onChange={(e)=>setPassword(e.target.value)}
-   />
-
-   <br/><br/>
-
-   <Button variant="contained" onClick={handleSignup}>
-    Create Account
-   </Button>
-
-  </Card>
-
- )
-
+    </div>
+  )
 }
 
 export default Signup
